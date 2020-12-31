@@ -13,7 +13,6 @@ object Main {
   implicit val system = ActorSystem(Behaviors.empty, "SprayExample")
   // needed for the future map/flatmap in the end and future in fetchItem and saveOrder
   implicit val executionContext = system.executionContext
-  implicit val um = Unmarshaller[HttpResponse, Stock]
   // domain model
   final case class Stock(
     lastUpdated: String,
@@ -30,7 +29,7 @@ object Main {
 
     responseFuture
       .onComplete {
-        case Success(res) => Unmarshal(res).to[Stock]
+        case Success(res) => Unmarshal(res).to[String]
         case Failure(_)   => sys.error("something wrong")
       }
   }
