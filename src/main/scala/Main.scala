@@ -9,11 +9,8 @@ import scala.util.{Failure, Success}
 
 object Main {
 
-  // needed to run the route
   implicit val system = ActorSystem(Behaviors.empty, "SprayExample")
-  // needed for the future map/flatmap in the end and future in fetchItem and saveOrder
   implicit val executionContext = system.executionContext
-  // domain model
   final case class Stock(
     lastUpdated: String,
     symbol: String,
